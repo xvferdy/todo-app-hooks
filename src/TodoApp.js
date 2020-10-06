@@ -8,6 +8,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 // import useTodoState from "./hooks/useTodoState";
 
 import TodoList from "./TodoList";
+import TodoForm from "./TodoForm";
 
 function TodoApp() {
   const initialTodos = [
@@ -15,7 +16,12 @@ function TodoApp() {
     { id: 2, task: "minum", completed: true },
     { id: 3, task: "game", completed: true },
   ];
+
   const [todos, setTodos] = useState(initialTodos);
+  const addTodo = (newTodoText) => {
+    //ingat todos berupa array
+    setTodos([...todos, { id: 4, task: newTodoText, complete: false }]);
+  };
   return (
     <Paper
       style={{
@@ -31,8 +37,9 @@ function TodoApp() {
           <Typography color="inherit">TODOS WITH HOOKS</Typography>
         </Toolbar>
       </AppBar>
+      <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} />
-      {console.log(todos)}
+      {/* {console.log(todos)} */}
     </Paper>
   );
 }
