@@ -22,6 +22,7 @@ function TodoApp() {
   const [todos, setTodos] = useState(initialTodos);
   // console.log(todos);
 
+  //adding new todo, from todo form
   const addTodo = (newTodoText) => {
     //ingat todos berupa array
     setTodos([...todos, { id: uuidv4(), task: newTodoText, complete: false }]);
@@ -35,9 +36,19 @@ function TodoApp() {
     setTodos(updatedTodos);
   };
 
+  //toggle checkbox
   const toggleTodo = (todoId) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+    );
+
+    setTodos(updatedTodos);
+  };
+
+  //edit todo form, toggle
+  const editTodo = (todoId, newTask) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === todoId ? { ...todo, task: newTask } : todo
     );
 
     setTodos(updatedTodos);
@@ -65,6 +76,7 @@ function TodoApp() {
             todos={todos}
             removeTodo={removeTodo}
             toggleTodo={toggleTodo}
+            editTodo={editTodo}
           />
           {/* {console.log(todos)} */}
         </Grid>
