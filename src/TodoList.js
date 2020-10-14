@@ -11,7 +11,7 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
   return (
     <Paper>
       <List>
-        {todos.map((todo) => (
+        {todos.map((todo, i) => (
           <React.Fragment key={todo.id}>
             <Todo
               key={todo.id}
@@ -22,9 +22,11 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
               toggleTodo={toggleTodo}
               editTodo={editTodo}
             />
-            <Divider />
+            {/* {console.log(i)} */}
+            {i < todos.length - 1 && <Divider />}
           </React.Fragment>
         ))}
+        {/* {console.log(todos.length)} */}
       </List>
     </Paper>
   );
