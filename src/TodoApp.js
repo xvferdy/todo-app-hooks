@@ -1,64 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
-// import useTodoState from "./hooks/useTodoState";
-
-import { v4 as uuidv4 } from "uuid";
 
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
+import useTodoState from "./hooks/useTodoState";
 
 function TodoApp() {
   const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
 
-  // const initialTodos = [
-  //   { id: 1, task: "makan", completed: true },
-  //   { id: 2, task: "minum", completed: true },
-  //   { id: 3, task: "game", completed: false },
-  // ];
-
-  const [todos, setTodos] = useState(initialTodos);
-  // console.log(todos);
+  //destruct frmo hooks, it's object so free order
+  const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
+    initialTodos
+  );
 
   useEffect(() => {
     window.localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-
-  //adding new todo, from todo form
-  const addTodo = (newTodoText) => {
-    //ingat todos berupa array
-    setTodos([...todos, { id: uuidv4(), task: newTodoText, complete: false }]);
-  };
-
-  const removeTodo = (todoId) => {
-    //filter out remove todo
-    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
-
-    //call setTodos with new todos array
-    setTodos(updatedTodos);
-  };
-
-  //toggle checkbox
-  const toggleTodo = (todoId) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
-    );
-
-    setTodos(updatedTodos);
-  };
-
-  //edit todo form, toggle
-  const editTodo = (todoId, newTask) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === todoId ? { ...todo, task: newTask } : todo
-    );
-
-    setTodos(updatedTodos);
-  };
 
   return (
     <Paper

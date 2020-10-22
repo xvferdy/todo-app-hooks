@@ -14,15 +14,18 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
           {todos.map((todo, i) => (
             <React.Fragment key={todo.id}>
               <Todo
+                {...todo}
+                // id={todo.id}
+                // task={todo.task}
+                // completed={todo.completed}
                 key={todo.id}
-                id={todo.id}
-                task={todo.task}
-                completed={todo.completed}
                 removeTodo={removeTodo}
                 toggleTodo={toggleTodo}
                 editTodo={editTodo}
               />
               {/* {console.log(i)} */}
+              {/* {console.log(todos)}
+              {console.log(todo)} */}
               {i < todos.length - 1 && <Divider />}
             </React.Fragment>
           ))}
