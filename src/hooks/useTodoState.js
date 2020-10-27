@@ -1,4 +1,5 @@
-import { useState } from "react";
+// we're using custom hooks inside custom hooks
+import useLocalStorageState from "./useLocalStorageState";
 import { v4 as uuidv4 } from "uuid";
 
 export default (initialTodos) => {
@@ -8,7 +9,7 @@ export default (initialTodos) => {
   //   { id: 3, task: "game", completed: false },
   // ];
 
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useLocalStorageState("todos", initialTodos);
   // console.log(todos);
 
   return {
