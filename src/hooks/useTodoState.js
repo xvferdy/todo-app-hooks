@@ -19,7 +19,7 @@ export default (initialTodos) => {
       //ingat todos berupa array
       setTodos([
         ...todos,
-        { id: uuidv4(), task: newTodoText, complete: false }, //A component is changing an uncontrolled input of type....
+        { id: uuidv4(), task: newTodoText, completed: false }, //A component is changing an uncontrolled input of type....
       ]);
     },
 
